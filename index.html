@@ -245,12 +245,19 @@
         }
 
         /* Adjust specific text/elements inside the card */
-        #auth-title, #main-app-section h2, #order-details-step h3 {
+        #auth-title {
             color: #1f2937; /* Headings to dark */
             text-shadow: none;
         }
-        #auth-subtitle, .text-gray-600 {
+        /* Make order bundle headings black */
+        #mtn-order-details-step h3,
+        #at-order-details-step h3,
+        #telecel-order-details-step h3 {
+            color: #000000; /* Black for these specific headings */
+        }
+        #main-app-section h2, #auth-subtitle, .text-gray-600 {
             color: #4a5568; /* Standard gray for readability */
+            text-shadow: none;
         }
 
         /* Payment account details styling */
@@ -305,20 +312,23 @@
         .dashboard-nav-buttons button {
             background-color: #FFD700;
             color: #1f2937;
-            padding: 0.75rem 1.5rem;
+            padding: 0.4rem 0.6rem; /* Further reduced padding */
             border-radius: 8px;
-            font-weight: 700;
+            font-weight: 600;
+            font-size: 0.8rem; /* Further reduced font size for text */
             transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex; /* Make buttons flexible for icons */
             flex-direction: column; /* Stack icon and text vertically */
             align-items: center;
-            gap: 0.25rem; /* Reduced gap for closer icon and text */
+            justify-content: center; /* Center content vertically within button */
+            gap: 0.05rem; /* Further reduced gap */
             text-align: center; /* Center the text below the icon */
+            min-height: 70px; /* Slightly smaller min height */
         }
         .dashboard-nav-buttons button i {
-            font-size: 1.5rem; /* Adjusted icon size to be smaller */
-            margin-bottom: 0.25rem; /* Small space below icon */
+            font-size: 1.1rem; /* Further adjusted icon size */
+            margin-bottom: 0.05rem; /* Very small space below icon */
         }
         .dashboard-nav-buttons button:hover {
             background-color: #FFC000;
@@ -329,6 +339,13 @@
             color: #FFD700; /* Yellow text for active button */
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3); /* Inset shadow for pressed look */
         }
+        /* Adjust grid for 6 columns on larger screens */
+        @media (min-width: 768px) {
+            .dashboard-nav-buttons {
+                grid-template-columns: repeat(6, minmax(0, 1fr)); /* Adjusted to 6 columns */
+            }
+        }
+
 
         /* Styling for individual order items */
         #orders-list > div {
@@ -456,12 +473,13 @@
         }
 
         /* Order sections within dashboard (this is the order page itself) */
-        #mtn-order-placement-section, /* Renamed */
-        #at-order-placement-section, /* New */
+        #mtn-order-placement-section,
+        #at-order-placement-section,
+        #telecel-order-placement-section, /* New Telecel section */
         #my-orders-section,
         #account-settings-section,
         #afa-bundle-section,
-        #computer-training-section { /* Added computer training section here */
+        #computer-training-section {
             background-color: #f9fafb; /* Light background for content sections */
             border: 1px solid #e5e7eb;
             border-radius: 8px;
@@ -471,14 +489,14 @@
 
         /* Styling for the new computer training curriculum display */
         .curriculum-draw-in {
-            text-align: center;
+            text-align: left; /* Changed to left align */
             max-width: 600px;
             margin: 0 auto;
-            padding: 2rem 1rem;
-            background-color: #e0f2fe; /* Light blue background for emphasis */
+            padding: 2rem 1.5rem; /* Increased horizontal padding */
+            background-color: #ffffff; /* Changed background to white */
             border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            color: #0c4a6e;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05); /* Softer shadow */
+            color: #1f2937; /* Darker text for readability on white */
         }
 
         .curriculum-draw-in h3 {
@@ -486,27 +504,78 @@
             font-weight: 800; /* Extra bold */
             color: #0c4a6e;
             margin-bottom: 1rem;
+            text-align: center; /* Keep heading centered */
         }
 
         .curriculum-draw-in p {
-            font-size: 1.125rem; /* text-lg */
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
+            font-size: 1.05rem; /* Slightly reduced font size for overall harmony */
+            margin-bottom: 1rem; /* Reduced margin-bottom for tighter paragraphs */
+            line-height: 1.7; /* Increased line height for spaciousness */
+            padding: 0 0.5rem; /* Small internal padding for text to prevent edge stick */
+            color: #374151; /* Slightly softer dark text */
+        }
+        .curriculum-draw-in p:last-of-type {
+            margin-bottom: 0;
         }
 
         .curriculum-draw-in .requirements {
-            background-color: #ffffff;
-            padding: 1rem;
+            background-color: #eff6ff; /* Very light blue for requirements box */
+            padding: 1.25rem; /* Increased padding */
             border-radius: 8px;
-            border: 1px solid #90cdf4;
+            border: 1px solid #bfdbfe; /* Softer blue border */
             font-size: 0.95rem;
-            margin-top: 1.5rem;
+            margin-top: 2rem; /* Increased margin top */
             color: #1f2937;
+            text-align: left;
+            line-height: 1.6;
         }
 
         .curriculum-draw-in .requirements strong {
-            color: #0c4a6e;
+            color: #1d4ed8; /* Darker blue for emphasis */
         }
+        .curriculum-draw-in .requirements ul {
+            list-style-type: disc; /* Ensure list bullets are visible */
+            margin-left: 1.5rem; /* Indent the list */
+            margin-top: 0.75rem;
+        }
+        /* Styles for images within the computer training section */
+        .training-images {
+            display: flex;
+            flex-wrap: wrap; /* Allow images to wrap on smaller screens */
+            justify-content: center;
+            gap: 1rem; /* Space between images */
+            margin-top: 2rem;
+            margin-bottom: 2rem; /* Space above and below image section */
+        }
+        .training-image-item {
+            width: 100%; /* Default to full width on mobile */
+            max-width: 250px; /* Max width for individual images */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        .training-image-item:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        .training-image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px; /* Ensure image corners are rounded */
+        }
+        @media (min-width: 640px) {
+            .training-image-item {
+                width: calc(50% - 0.5rem); /* Two images per row on small screens */
+            }
+        }
+        @media (min-width: 768px) {
+            .training-image-item {
+                width: calc(33.33% - 0.66rem); /* Three images per row on medium screens */
+            }
+        }
+
 
         /* Adjust card within dashboard to be centered and have a max-width */
         /* These styles are now largely handled by #dashboard-content-area and the individual sections */
@@ -799,9 +868,10 @@
             <div id="mobile-menu" class="hidden">
                 <a href="#" id="mobile-mtn-data-link">MTN DATA</a>
                 <a href="#" id="mobile-at-data-link">AT DATA</a>
-                <a href="#" id="mobile-my-orders-link">My Orders</a>
+                <a href="#" id="mobile-telecel-data-link">TELECEL DATA</a> <!-- New Mobile Nav Link -->
                 <a href="#" id="mobile-afa-bundle-link">AFA Call Bundle</a>
                 <a href="#" id="mobile-computer-training-link">Computer Training</a>
+                <a href="#" id="mobile-my-orders-link">My Orders</a> <!-- Reordered -->
                 <a href="#" id="mobile-agent-link">Become an Agent</a>
                 <a href="#" id="mobile-contact-link">Contact Support</a>
                 <a href="https://chat.whatsapp.com/JZhLLboZmW9FjxcimGtZuX" target="_blank">Join our community</a>
@@ -884,19 +954,19 @@
 
                     <form class="space-y-4 md:space-y-6 hidden" id="signUpForm">
                         <div>
-                            <label for="signup-name" class="sr-only">Your Name</label>
+                            <label for="signup-name" class="block text-sm font-medium text-gray-700 mb-1">Your Name<span class="text-red-500">*</span>:</label>
                             <input id="signup-name" name="name" type="text" required
                                    class="appearance-none relative block w-full input-field"
                                    placeholder="Your Name">
                         </div>
                         <div>
-                            <label for="signup-email" class="sr-only">Email Address</label>
+                            <label for="signup-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address<span class="text-red-500">*</span>:</label>
                             <input id="signup-email" name="email" type="email" autocomplete="email" required
                                    class="appearance-none relative block w-full input-field"
                                    placeholder="Email Address">
                         </div>
                         <div class="password-input-container">
-                            <label for="signup-password" class="sr-only">Password</label>
+                            <label for="signup-password" class="block text-sm font-medium text-gray-700 mb-1">Password<span class="text-red-500">*</span>:</label>
                             <input id="signup-password" name="password" type="password" autocomplete="new-password" required
                                    class="appearance-none relative block w-full input-field"
                                    placeholder="Password">
@@ -905,7 +975,7 @@
                             </button>
                         </div>
                         <div class="password-input-container">
-                            <label for="signup-confirm-password" class="sr-only">Confirm Password</label>
+                            <label for="signup-confirm-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password<span class="text-red-500">*</span>:</label>
                             <input id="signup-confirm-password" name="confirmPassword" type="password" autocomplete="new-password" required
                                    class="appearance-none relative block w-full input-field"
                                    placeholder="Confirm Password">
@@ -1022,15 +1092,15 @@
             </div>
 
             <div id="dashboard-content-area">
-                <div class="dashboard-nav-buttons grid grid-cols-2 sm:grid-cols-5 gap-4 mb-8"> <!-- Adjusted grid-cols -->
-                    <button id="mtn-order-placement-btn" class="active"> <!-- Renamed ID -->
+                <div class="dashboard-nav-buttons grid grid-cols-2 sm:grid-cols-6 gap-4 mb-8">
+                    <button id="mtn-order-placement-btn" class="active">
                         <i class="fas fa-wifi"></i> <span>MTN DATA</span>
                     </button>
-                    <button id="at-order-placement-btn"> <!-- New button for AT DATA -->
+                    <button id="at-order-placement-btn">
                         <i class="fas fa-broadcast-tower"></i> <span>AT DATA</span>
                     </button>
-                    <button id="my-orders-btn">
-                        <i class="fas fa-history"></i> <span>My Orders</span>
+                    <button id="telecel-order-placement-btn">
+                        <i class="fas fa-mobile-alt"></i> <span>TELECEL DATA</span>
                     </button>
                     <button id="afa-bundle-btn">
                         <i class="fas fa-phone-alt"></i> <span>AFA Call Bundle</span>
@@ -1038,15 +1108,18 @@
                     <button id="computer-training-btn">
                         <i class="fas fa-desktop"></i> <span>Computer Training</span>
                     </button>
+                    <button id="my-orders-btn">
+                        <i class="fas fa-history"></i> <span>My Orders</span>
+                    </button>
                     <button id="account-settings-btn">
                         <i class="fas fa-user-cog"></i> <span>Account</span>
                     </button>
                 </div>
 
-                <!-- MTN Data Order Section (renamed ID) -->
+                <!-- MTN Data Order Section -->
                 <section id="mtn-order-placement-section">
                     <div id="mtn-order-details-step" class="p-6 md:p-8">
-                        <h3 class="mt-6 text-center text-2xl font-extrabold text-yellow-400 mb-6">
+                        <h3 class="mt-6 text-center text-2xl font-extrabold text-black mb-6">
                             MTNUP2U DATA BUNDLE
                         </h3>
                         <p class="mt-2 text-center text-sm text-gray-600">
@@ -1076,10 +1149,10 @@
                     </div>
                 </section>
 
-                <!-- AirtelTigo Data Order Section (New) -->
+                <!-- AirtelTigo Data Order Section -->
                 <section id="at-order-placement-section" class="hidden">
                     <div id="at-order-details-step" class="p-6 md:p-8">
-                        <h3 class="mt-6 text-center text-2xl font-extrabold text-yellow-400 mb-6">
+                        <h3 class="mt-6 text-center text-2xl font-extrabold text-black mb-6">
                             AIRTEL TIGO DATA BUNDLE
                         </h3>
                         <p class="mt-2 text-center text-sm text-gray-600">
@@ -1097,6 +1170,39 @@
 
                             <div class="mt-6 text-right">
                                 <p class="text-lg font-bold">Total Amount: <span id="at-total-order-amount">GHS 0.00</span></p>
+                            </div>
+
+                            <div>
+                                <button type="submit"
+                                        class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md submit-button">
+                                    Proceed to Payment
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- Telecel Data Order Section (New Section) -->
+                <section id="telecel-order-placement-section" class="hidden">
+                    <div id="telecel-order-details-step" class="p-6 md:p-8">
+                        <h3 class="mt-6 text-center text-2xl font-extrabold text-black mb-6">
+                            TELECEL DATA BUNDLE
+                        </h3>
+                        <p class="mt-2 text-center text-sm text-gray-600">
+                            Fill in your details to place your Telecel data order.
+                        </p>
+                        <form class="mt-8 space-y-6" id="telecelOrderForm">
+                            <!-- Container for multiple order items -->
+                            <div id="telecel-order-items-container">
+                                <!-- Initial order item will be added by JavaScript -->
+                            </div>
+
+                            <button type="button" id="add-another-telecel-order-btn" class="submit-button w-full py-2 px-4 rounded-md text-sm font-medium shadow-md transition-all duration-200 ease-in-out hover:shadow-lg mt-4">
+                                Add Another Telecel Order
+                            </button>
+
+                            <div class="mt-6 text-right">
+                                <p class="text-lg font-bold">Total Amount: <span id="telecel-total-order-amount">GHS 0.00</span></p>
                             </div>
 
                             <div>
@@ -1151,7 +1257,7 @@
                                 <ol class="list-decimal list-inside space-y-1">
                                     <li>Dial *1848#</li>
                                     <li>Select option 1 to Buy AFA bundle</li>
-                                    <li>Choose (Monthly no data bundle)</li> <!-- Changed text -->
+                                    <li>Choose (Monthly no data bundle)</li>
                                     <li>Select Option to Confirm</li>
                                     <li>Enter MoMo PIN and approve payment for the service</li>
                                     <li>You will receive both SMS notifications from MTN and MoMo.</li>
@@ -1174,7 +1280,7 @@
                             </div>
                         </div>
                         
-                        <h3 class="text-xl font-bold mb-2 mt-8 text-center uppercase">REGISTER YOUR NUMBER</h3> <!-- New Header with margin-top and centered -->
+                        <h3 class="text-xl font-bold mb-2 mt-8 text-center uppercase">REGISTER YOUR NUMBER</h3>
                         <form id="afaRegistrationForm" class="space-y-6">
                             <div>
                                 <label for="afa-full-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name<span class="text-red-500">*</span>: </label>
@@ -1207,19 +1313,34 @@
                 <!-- New Computer Training Section -->
                 <section id="computer-training-section" class="hidden">
                     <div class="p-6 md:p-8">
-                        <h2 class="text-2xl font-bold mb-4 text-center">Unlock Your Digital Potential!</h2>
+                        <h2 class="text-2xl font-bold mb-4 text-center">Learn Computer Skills</h2>
                         <div class="curriculum-draw-in">
-                            <h3>Don't Get Left Behind in the Digital Age!</h3>
-                            <p>In today's fast-evolving world, computer skills aren't just a nice-to-have, they're a fundamental necessity. Are you still grappling with the basics while others are navigating the digital landscape with ease?</p>
-                            <p class="mt-4">The truth is, **your future success, both personal and professional, is increasingly linked to your digital literacy.** Don't let a lack of computer knowledge hold you back from opportunities, connection, and growth.</p>
-                            <p class="mt-4">At BD Tech Solutions, we believe everyone deserves to be fluent in the language of technology. Our online training will guide you from feeling like a complete stranger to computing, to confidently mastering essential skills like typing, using Word, Excel, PowerPoint, and navigating any computer interface.</p>
-                            <p class="mt-4 font-bold text-xl">Ready to seize control of your digital destiny and truly become "YOUR LINK TO THE DIGITAL WORLD"?</p>
+                            <h3>Don't Get Left Behind in the Digital Age</h3>
+                            <p>In today's fast-moving world, computer skills are no longer just good to have. They are a must-have for everyone. Do you still find it hard to use a computer while others use them easily?</p>
+                            <div class="training-images">
+                                <div class="training-image-item">
+                                    <img src="https://placehold.co/300x200/ADD8E6/000000?text=Digital+Future" alt="Digital Future">
+                                </div>
+                                <div class="training-image-item">
+                                    <img src="https://placehold.co/300x200/90EE90/000000?text=Unlock+Potential" alt="Unlocking Potential">
+                                </div>
+                            </div>
+                            <p>The truth is, your success in life and at work is more and more tied to how well you use digital tools. Don't let a lack of computer knowledge stop you from new chances, connecting with others, and growing.</p>
+                            <p>At BD Tech Solutions, we believe everyone should feel good about using technology. Our online training will take you from being new to computers to being able to use them well. You will learn important skills like typing, using Word, Excel, PowerPoint, and how to use any computer easily.</p>
+                            <div class="training-images">
+                                <div class="training-image-item">
+                                    <img src="https://placehold.co/300x200/DDA0DD/000000?text=Learn+Skills" alt="Learning Skills">
+                                </div>
+                                <div class="training-image-item">
+                                    <img src="https://placehold.co/300x200/FFD700/000000?text=Connect+Globally" alt="Global Connection">
+                                </div>
+                            </div>
                             <div class="requirements">
                                 <strong>What you need to get started:</strong>
                                 <ul class="list-disc list-inside ml-4 mt-2">
                                     <li>A computer (desktop or laptop)</li>
                                     <li>A stable internet connection</li>
-                                    <li>Your determination to learn!</li>
+                                    <li>Your desire to learn.</li>
                                 </ul>
                             </div>
                         </div>
@@ -1234,15 +1355,15 @@
                         <form id="profile-edit-form" class="space-y-6 mb-8">
                             <h3 class="text-xl font-semibold mb-4">Edit Profile Information</h3>
                             <div>
-                                <label for="profile-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name:</label>
+                                <label for="profile-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name<span class="text-red-500">*</span>:</label>
                                 <input type="text" id="profile-name" name="name" class="input-field block w-full">
                             </div>
                             <div>
-                                <label for="profile-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address:</label>
+                                <label for="profile-email" class="block text-sm font-medium text-gray-700 mb-1">Email Address<span class="text-red-500">*</span>:</label>
                                 <input type="email" id="profile-email" name="email" class="input-field block w-full">
                             </div>
                             <div>
-                                <label for="profile-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number:</label>
+                                <label for="profile-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number<span class="text-red-500">*</span>:</label>
                                 <input type="tel" id="profile-phone" name="phone" class="input-field block w-full">
                             </div>
                             <button type="submit" class="submit-button w-full py-2 px-4 rounded-md text-sm font-medium shadow-md transition-all duration-200 ease-in-out hover:shadow-lg">
@@ -1253,15 +1374,15 @@
                         <form id="password-change-form" class="space-y-6">
                             <h3 class="text-xl font-semibold mb-4">Change Password</h3>
                             <div>
-                                <label for="current-password" class="block text-sm font-medium text-gray-700 mb-1">Current Password:</label>
+                                <label for="current-password" class="block text-sm font-medium text-gray-700 mb-1">Current Password<span class="text-red-500">*</span>:</label>
                                 <input type="password" id="current-password" name="currentPassword" class="input-field block w-full" required>
                             </div>
                             <div>
-                                <label for="new-password" class="block text-sm font-medium text-gray-700 mb-1">New Password:</label>
+                                <label for="new-password" class="block text-sm font-medium text-gray-700 mb-1">New Password<span class="text-red-500">*</span>:</label>
                                 <input type="password" id="new-password" name="newPassword" class="input-field block w-full" required>
                             </div>
                             <div>
-                                <label for="confirm-new-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password:</label>
+                                <label for="confirm-new-password" class="block text-sm font-medium text-gray-700 mb-1">Confirm New Password<span class="text-red-500">*</span>:</label>
                                 <input type="password" id="confirm-new-password" name="confirmNewPassword" class="input-field block w-full" required>
                             </div>
                             <button type="submit" class="submit-button w-full py-2 px-4 rounded-md text-sm font-medium shadow-md transition-all duration-200 ease-in-out hover:shadow-lg">
@@ -1285,6 +1406,7 @@
                     <option value="" disabled selected>Select Network</option>
                     <option value="MTN">MTN</option>
                     <option value="AirtelTigo">AirtelTigo</option>
+                    <option value="Telecel">Telecel</option>
                 </select>
             </div>
             <div>
@@ -1347,6 +1469,21 @@
                 "40GB": "150.00Ghc", "50GB": "180.00Ghc", "100GB": "250.00Ghc", "200GB": "425.00Ghc"
             };
 
+            // Telecel Prices from the provided image, with adjustments
+            const telecelRawPrices = {
+                "5GB": "27.00Ghc",
+                "10GB": "54.00Ghc", // Changed from 51
+                "15GB": "72.00Ghc", // Changed from 75
+                "20GB": "102.00Ghc",
+                "25GB": "125.00Ghc",
+                "30GB": "150.00Ghc",
+                "35GB": "180.00Ghc",
+                "40GB": "200.00Ghc",
+                "45GB": "225.00Ghc",
+                "50GB": "240.00Ghc",
+                "100GB": "450.00Ghc"
+            };
+
 
             // Convert raw prices to bundle objects
             const mtnBundles = Object.keys(mtnRawPrices).map(size => {
@@ -1359,19 +1496,27 @@
                 return { "size": size, "price": price, "validity": "30 days" };
             });
 
+            const telecelBundles = Object.keys(telecelRawPrices).map(size => {
+                const price = parseFloat(telecelRawPrices[size].replace('Ghc', ''));
+                return { "size": size, "price": price, "validity": "30 days" };
+            });
+
             // Consolidated dataBundles object
             const allDataBundles = {
                 "MTN": mtnBundles,
-                "AirtelTigo": atBundles
+                "AirtelTigo": atBundles,
+                "Telecel": telecelBundles // Add Telecel bundles
             };
 
             // Lookups for easy price retrieval by size and network
             const bundlePricesLookup = {
                 "MTN": {},
-                "AirtelTigo": {}
+                "AirtelTigo": {},
+                "Telecel": {} // Add Telecel lookup
             };
             mtnBundles.forEach(bundle => { bundlePricesLookup["MTN"][bundle.size] = bundle.price; });
             atBundles.forEach(bundle => { bundlePricesLookup["AirtelTigo"][bundle.size] = bundle.price; });
+            telecelBundles.forEach(bundle => { bundlePricesLookup["Telecel"][bundle.size] = bundle.price; }); // Populate Telecel lookup
 
 
             // Data storage for order and user
@@ -1407,9 +1552,16 @@
             const addAnotherAtOrderBtn = document.getElementById('add-another-at-order-btn');
             const atTotalOrderAmountSpan = document.getElementById('at-total-order-amount');
 
+            // Telecel Order Elements
+            const telecelOrderForm = document.getElementById('telecelOrderForm');
+            const telecelOrderItemsContainer = document.getElementById('telecel-order-items-container');
+            const addAnotherTelecelOrderBtn = document.getElementById('add-another-telecel-order-btn');
+            const telecelTotalOrderAmountSpan = document.getElementById('telecel-total-order-amount');
+
 
             const mtnOrderPlacementBtn = document.getElementById('mtn-order-placement-btn');
             const atOrderPlacementBtn = document.getElementById('at-order-placement-btn');
+            const telecelOrderPlacementBtn = document.getElementById('telecel-order-placement-btn'); // New
             const myOrdersBtn = document.getElementById('my-orders-btn');
             const afaBundleBtn = document.getElementById('afa-bundle-btn');
             const computerTrainingBtn = document.getElementById('computer-training-btn');
@@ -1417,6 +1569,7 @@
 
             const mtnOrderPlacementSection = document.getElementById('mtn-order-placement-section');
             const atOrderPlacementSection = document.getElementById('at-order-placement-section');
+            const telecelOrderPlacementSection = document.getElementById('telecel-order-placement-section'); // New
             const myOrdersSection = document.getElementById('my-orders-section');
             const afaBundleSection = document.getElementById('afa-bundle-section');
             const computerTrainingSection = document.getElementById('computer-training-section');
@@ -1456,6 +1609,7 @@
             const mobileContactLink = document.getElementById('mobile-contact-link');
             const mobileMtnDataLink = document.getElementById('mobile-mtn-data-link');
             const mobileAtDataLink = document.getElementById('mobile-at-data-link');
+            const mobileTelecelDataLink = document.getElementById('mobile-telecel-data-link'); // New
             const mobileMyOrdersLink = document.getElementById('mobile-my-orders-link');
             const mobileAfaBundleLink = document.getElementById('mobile-afa-bundle-link');
             const mobileComputerTrainingLink = document.getElementById('mobile-computer-training-link');
@@ -1518,7 +1672,7 @@
 
                     userDisplay.textContent = `Welcome, ${user.displayName || user.email}`;
                     showMainApp();
-                    displayMessage('You are signed in!', 'success');
+                    displayMessage('You are signed in.', 'success'); // Removed exclamation
                 } else {
                     console.log('User state changed: Signed OUT.');
                     showAuthForms();
@@ -1569,7 +1723,7 @@
                     const userCredential = await auth.createUserWithEmailAndPassword(registeredUserEmail, signupPassword);
                     await userCredential.user.updateProfile({ displayName: registeredUserName });
                     
-                    displayMessage('Sign up successful! Please sign in using your new account.', 'success');
+                    displayMessage('Sign up successful. Please sign in using your new account.', 'success'); // Removed exclamation
                     signInForm.classList.remove('hidden');
                     signUpForm.classList.add('hidden');
                     forgotPasswordForm.classList.add('hidden');
@@ -1681,7 +1835,7 @@
                 afaMessageBox.classList.remove('hidden');
             }
 
-            // --- Dynamic Order Form Logic for both MTN and AT ---
+            // --- Dynamic Order Form Logic for MTN, AT, and Telecel ---
             function addOrderItem(containerElement, networkType) {
                 const clone = orderItemTemplate.content.cloneNode(true);
                 const networkSelect = clone.querySelector('[name="network"]');
@@ -1755,19 +1909,24 @@
                     mtnTotalOrderAmountSpan.textContent = `GHS ${total.toFixed(2)}`;
                 } else if (networkType === 'AirtelTigo') {
                     atTotalOrderAmountSpan.textContent = `GHS ${total.toFixed(2)}`;
+                } else if (networkType === 'Telecel') {
+                    telecelTotalOrderAmountSpan.textContent = `GHS ${total.toFixed(2)}`;
                 }
             }
             
-            // Add initial order items for both forms
+            // Add initial order items for all forms
             addOrderItem(mtnOrderItemsContainer, 'MTN');
             addOrderItem(atOrderItemsContainer, 'AirtelTigo');
+            addOrderItem(telecelOrderItemsContainer, 'Telecel');
+
 
             // Event listeners for "Add Another Order" buttons
             addAnotherMtnOrderBtn.addEventListener('click', () => addOrderItem(mtnOrderItemsContainer, 'MTN'));
             addAnotherAtOrderBtn.addEventListener('click', () => addOrderItem(atOrderItemsContainer, 'AirtelTigo'));
+            addAnotherTelecelOrderBtn.addEventListener('click', () => addOrderItem(telecelOrderItemsContainer, 'Telecel')); // New
 
 
-            // --- Order Form Submission (MTN and AT) ---
+            // --- Order Form Submission (MTN, AT, and Telecel) ---
             async function handleOrderSubmission(event, networkType) {
                 event.preventDefault();
 
@@ -1777,7 +1936,11 @@
                     return;
                 }
 
-                const containerElement = networkType === 'MTN' ? mtnOrderItemsContainer : atOrderItemsContainer;
+                const containerElement = 
+                    networkType === 'MTN' ? mtnOrderItemsContainer :
+                    networkType === 'AirtelTigo' ? atOrderItemsContainer :
+                    telecelOrderItemsContainer; // Handle Telecel
+
                 const allOrderItems = containerElement.querySelectorAll('.single-order-item');
                 const ordersToProcess = [];
                 let totalPaymentAmount = 0;
@@ -1838,7 +2001,7 @@
                     callback: function(response){
                         (async () => {
                             const paymentReference = response.reference;
-                            console.log('Paystack Payment Successful! Reference:', paymentReference);
+                            console.log('Paystack Payment Successful. Reference:', paymentReference); // Removed exclamation
                             
                             switchDashboardView('my-orders');
                             displayMessage('Payment successful! Your order has been placed and confirmed.', 'success');
@@ -1871,6 +2034,10 @@
                                 atOrderItemsContainer.innerHTML = '';
                                 addOrderItem(atOrderItemsContainer, 'AirtelTigo');
                                 atTotalOrderAmountSpan.textContent = 'GHS 0.00';
+                            } else if (networkType === 'Telecel') { // Reset Telecel form
+                                telecelOrderItemsContainer.innerHTML = '';
+                                addOrderItem(telecelOrderItemsContainer, 'Telecel');
+                                telecelTotalOrderAmountSpan.textContent = 'GHS 0.00';
                             }
                             
                             const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKwu8XC1awByOIwiTXGGY7iMr1J_vNSrZ1tUv7tPY-Edlzvrs5H1SWyHKIjz86leYi/exec';
@@ -1908,11 +2075,13 @@
 
             mtnOrderForm.addEventListener('submit', (event) => handleOrderSubmission(event, 'MTN'));
             atOrderForm.addEventListener('submit', (event) => handleOrderSubmission(event, 'AirtelTigo'));
+            telecelOrderForm.addEventListener('submit', (event) => handleOrderSubmission(event, 'Telecel')); // New
 
 
             // --- Dashboard Navigation ---
             mtnOrderPlacementBtn.addEventListener('click', () => switchDashboardView('mtn-order-placement'));
             atOrderPlacementBtn.addEventListener('click', () => switchDashboardView('at-order-placement'));
+            telecelOrderPlacementBtn.addEventListener('click', () => switchDashboardView('telecel-order-placement')); // New
             myOrdersBtn.addEventListener('click', () => switchDashboardView('my-orders'));
             afaBundleBtn.addEventListener('click', () => switchDashboardView('afa-bundle'));
             computerTrainingBtn.addEventListener('click', () => switchDashboardView('computer-training'));
@@ -1921,6 +2090,7 @@
             function switchDashboardView(view) {
                 mtnOrderPlacementSection.classList.add('hidden');
                 atOrderPlacementSection.classList.add('hidden');
+                telecelOrderPlacementSection.classList.add('hidden'); // New
                 myOrdersSection.classList.add('hidden');
                 afaBundleSection.classList.add('hidden');
                 computerTrainingSection.classList.add('hidden');
@@ -1930,6 +2100,7 @@
 
                 mtnOrderPlacementBtn.classList.remove('active');
                 atOrderPlacementBtn.classList.remove('active');
+                telecelOrderPlacementBtn.classList.remove('active'); // New
                 myOrdersBtn.classList.remove('active');
                 afaBundleBtn.classList.remove('active');
                 computerTrainingBtn.classList.remove('active');
@@ -1950,6 +2121,13 @@
                     atOrderItemsContainer.innerHTML = '';
                     addOrderItem(atOrderItemsContainer, 'AirtelTigo');
                     atTotalOrderAmountSpan.textContent = 'GHS 0.00';
+                    messageBox.classList.add('hidden');
+                } else if (view === 'telecel-order-placement') { // New view switch
+                    telecelOrderPlacementSection.classList.remove('hidden');
+                    telecelOrderPlacementBtn.classList.add('active');
+                    telecelOrderItemsContainer.innerHTML = '';
+                    addOrderItem(telecelOrderItemsContainer, 'Telecel');
+                    telecelTotalOrderAmountSpan.textContent = 'GHS 0.00';
                     messageBox.classList.add('hidden');
                 }
                 else if (view === 'my-orders') {
@@ -2022,7 +2200,7 @@
                     callback: function(response) {
                         (async () => {
                             const paymentReference = response.reference;
-                            console.log('Paystack Payment Successful for AFA Bundle! Reference:', paymentReference);
+                            console.log('Paystack Payment Successful for AFA Bundle. Reference:', paymentReference); // Removed exclamation
 
                             switchDashboardView('my-orders');
                             displayMessage('AFA Call Bundle registration successful! Your request has been confirmed.', 'success');
@@ -2045,7 +2223,7 @@
 
                             afaRegistrationForm.reset();
 
-                            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKwu8XC1awByHKIjz86leYi/exec';
+                            const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwKwu8XC1awByOIwiTXGGY7iMr1J_vNSrZ1tUv7tPY-Edlzvrs5H1SWyHKIjz86leYi/exec';
 
                             try {
                                 const scriptResponse = await fetch(GOOGLE_APPS_SCRIPT_URL, {
@@ -2161,7 +2339,7 @@
                 const orderIndex = currentOrders.findIndex(order => order.id === orderId);
                 if (orderIndex !== -1) {
                     currentOrders[orderIndex].status = 'Delivered';
-                    displayMessage(`Order ${orderId} has been marked as Delivered!`, 'success');
+                    displayMessage(`Order ${orderId} has been marked as Delivered.`, 'success'); // Removed exclamation
                     updateOrderStats();
                     renderOrders();
                     localStorage.setItem(`userOrders_${currentUserUid}`, JSON.stringify(currentOrders));
@@ -2211,8 +2389,8 @@
                         registeredUserName = newName;
                         registeredUserEmail = newEmail;
                         registeredUserPhone = newPhone;
-                        userDisplay.textContent = `Welcome, ${registeredUserName}!`;
-                        displayAccountMessage('Profile updated successfully!', 'success');
+                        userDisplay.textContent = `Welcome, ${registeredUserName}.`; // Removed exclamation
+                        displayAccountMessage('Profile updated successfully.', 'success'); // Removed exclamation
                     } else {
                         displayAccountMessage('No user is signed in to update profile.', 'error');
                     }
@@ -2251,7 +2429,7 @@
                         const credential = firebase.auth.EmailAuthProvider.credential(user.email, currentPassword);
                         await user.reauthenticateWithCredential(credential);
                         await user.updatePassword(newPassword);
-                        displayAccountMessage('Password changed successfully!', 'success');
+                        displayAccountMessage('Password changed successfully.', 'success'); // Removed exclamation
                         currentPasswordInput.value = '';
                         newPasswordInput.value = '';
                         confirmNewPasswordInput.value = '';
@@ -2281,6 +2459,11 @@
             mobileAtDataLink.addEventListener('click', (event) => {
                 event.preventDefault();
                 switchDashboardView('at-order-placement');
+                mobileMenu.classList.remove('open');
+            });
+            mobileTelecelDataLink.addEventListener('click', (event) => { // New mobile link listener
+                event.preventDefault();
+                switchDashboardView('telecel-order-placement');
                 mobileMenu.classList.remove('open');
             });
             mobileMyOrdersLink.addEventListener('click', (event) => {
@@ -2436,10 +2619,6 @@
                 event.stopPropagation(); // Prevent global click from immediately closing
                 toggleAfaAccordion(afaBenefitsToggle, afaBenefitsContent);
             });
-
-            // --- Computer Training Section - No accordion logic needed for simplified content ---
-            // Removed previous curriculum level accordion functions as they are no longer needed
-            // The content is static for the draw-in message.
 
         });
     </script>
